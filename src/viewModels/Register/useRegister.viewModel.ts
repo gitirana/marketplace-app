@@ -1,21 +1,28 @@
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { registerScheme, type RegisterFormData } from "./register.scheme"
+import { useRegisterMutation } from "../../shared/queries/auth/use-register.mutation"
 
 export const useRegisterViewModel = () => {
+  const userRegisterMutation = useRegisterMutation()
+
   const { control, handleSubmit, formState: { errors } } = useForm<RegisterFormData>({
     resolver: yupResolver(registerScheme),
     defaultValues: {
-      confirmPassword: "",
-      email: "",
-      name: "",
-      password: "",
-      phone: ""
+      confirmPassword: "123123123",
+      email: "teste@email.com",
+      name: "Usuario Teste",
+      password: "123123123",
+      phone: "11111111111"
     }
   })
 
 
-  const onSubmit = handleSubmit(({ }) => { })
+  const onSubmit = handleSubmit(async (userData) => {
+    const { confirmPassword, ...registerData } = userData
+
+    await userRegisterMutation.mutateAsync(registerData);
+  })
 
   return {
     control, errors, onSubmit
