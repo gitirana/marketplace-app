@@ -1,9 +1,14 @@
-import { Text, View } from "react-native";
+import { router } from "expo-router";
+import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Login() {
   return (
-    <View className="flex flex-col justify-center items-center">
+    <View className="flex-1 justify-center items-center">
       <Text>Login</Text>
+
+      <TouchableOpacity onPress={() => router.push("register")}>
+        <Text>Registro</Text>
+      </TouchableOpacity>
     </View>
   )
 }
