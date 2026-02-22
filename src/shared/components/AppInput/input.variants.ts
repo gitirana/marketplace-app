@@ -25,3 +25,5 @@ export const appInputVariants = tv({
     isFocused: false
   }
 })
+
+export type AppInputVariantsProps = VariantProps<typeof appInputVariants>
